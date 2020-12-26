@@ -1,0 +1,241 @@
+{
+ "actions": [],
+ "autoname": "naming_series:",
+ "creation": "2020-12-15 16:04:57.240815",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "client_name",
+  "site",
+  "client_address",
+  "client_gst_number",
+  "client_pan_number",
+  "column_break_4",
+  "posting_date",
+  "company_name",
+  "address",
+  "gst_number",
+  "pan_number",
+  "bank_name",
+  "account_no",
+  "ifsc_no",
+  "section_break_7",
+  "start_date",
+  "column_break_14",
+  "end_date",
+  "get_details",
+  "section_break_16",
+  "items",
+  "taxes",
+  "section_break_20",
+  "net_amount",
+  "tax_amount",
+  "column_break_23",
+  "grand_total",
+  "total_in_words"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "options": "Today"
+  },
+  {
+   "fieldname": "client_name",
+   "fieldtype": "Link",
+   "label": "Client Name",
+   "options": "Client"
+  },
+  {
+   "fetch_from": "client_name.address",
+   "fieldname": "client_address",
+   "fieldtype": "Small Text",
+   "label": "Client Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Boss Management Services",
+   "fieldname": "company_name",
+   "fieldtype": "Link",
+   "label": "Company Name",
+   "options": "Client"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break",
+   "label": "Payroll Details"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "Boss/20-21/"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Client Invoice Item"
+  },
+  {
+   "fetch_from": "client_name.gst_no",
+   "fieldname": "client_gst_number",
+   "fieldtype": "Data",
+   "label": "Client GST Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "client_name.pan_no",
+   "fieldname": "client_pan_number",
+   "fieldtype": "Data",
+   "label": "Client PAN Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "company_name.gst_no",
+   "fieldname": "gst_number",
+   "fieldtype": "Data",
+   "label": "GST Number",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "company_name.pan_no",
+   "fieldname": "pan_number",
+   "fieldtype": "Data",
+   "label": "PAN Number",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "column_break_14",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "section_break_16",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "get_details",
+   "fieldtype": "Button",
+   "label": "Get Details"
+  },
+  {
+   "fieldname": "taxes",
+   "fieldtype": "Table",
+   "label": "Taxes",
+   "options": "Invoice Tax Item"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "Net Amount",
+   "read_only": 1,
+   "read_only_depends_on": "net_amount"
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "Tax Amount",
+   "read_only": 1,
+   "read_only_depends_on": "tax_amount"
+  },
+  {
+   "fieldname": "column_break_23",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "Grand Total",
+   "read_only": 1,
+   "read_only_depends_on": "grand_total"
+  },
+  {
+   "fetch_from": "company_name.bank_name",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Bank Name"
+  },
+  {
+   "fetch_from": "company_name.account_number",
+   "fieldname": "account_no",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Account No"
+  },
+  {
+   "fetch_from": "company_name.ifsc_no",
+   "fieldname": "ifsc_no",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "IFSC No"
+  },
+  {
+   "fetch_from": "company_name.address",
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "Address",
+   "read_only": 1
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Site"
+  },
+  {
+   "fieldname": "total_in_words",
+   "fieldtype": "Data",
+   "label": "Total in Words",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2020-12-23 13:04:58.419510",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Client Invoice",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "client_name",
+ "track_changes": 1
+}

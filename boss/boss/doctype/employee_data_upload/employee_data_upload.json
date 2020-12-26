@@ -1,0 +1,78 @@
+{
+ "actions": [],
+ "autoname": "EDU-.####",
+ "creation": "2020-12-22 12:50:30.489140",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "posting_date",
+  "number_of_employee",
+  "column_break_3",
+  "site",
+  "attachment"
+ ],
+ "fields": [
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Posting Date",
+   "options": "Today",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "number_of_employee",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Number of Employee",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Site",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "attachment",
+   "fieldtype": "Attach",
+   "label": "Attachment",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2020-12-22 23:32:32.196052",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Employee Data Upload",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

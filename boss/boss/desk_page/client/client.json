@@ -1,0 +1,59 @@
+{
+ "cards": [
+  {
+   "hidden": 0,
+   "label": "Client",
+   "links": "[\n    {\n        \"label\": \"Client\",\n        \"name\": \"Client\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"label\": \"Client Invoice\",\n        \"name\": \"Client Invoice\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"label\": \"Site\",\n        \"name\": \"Site\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"label\": \"Timesheet\",\n        \"name\": \"Timesheet\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"label\": \"Statutory Detail\",\n        \"name\": \"Statutory Detail\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    },\n    {\n        \"label\": \"Employee Data Upload\",\n        \"name\": \"Employee Data Upload\",\n        \"onboard\": 1,\n        \"type\": \"doctype\"\n    }\n]"
+  },
+  {
+   "hidden": 0,
+   "label": "Report",
+   "links": "[\n    {\n        \"dependencies\": [\n            \"Salary Slip\"\n        ],\n        \"doctype\": \"Salary Slip\",\n        \"is_query_report\": true,\n        \"label\": \"PF Report\",\n        \"name\": \"PF Report\",\n        \"type\": \"report\"\n    },\n    {\n        \"dependencies\": [\n            \"Salary Slip\"\n        ],\n        \"doctype\": \"Salary Slip\",\n        \"is_query_report\": true,\n        \"label\": \"ESI Report\",\n        \"name\": \"ESI Report\",\n        \"type\": \"report\"\n    },\n    {\n        \"dependencies\": [\n            \"Salary Slip\"\n        ],\n        \"doctype\": \"Salary Slip\",\n        \"is_query_report\": true,\n        \"label\": \"PT Report\",\n        \"name\": \"PT Report\",\n        \"type\": \"report\"\n    },\n    {\n        \"dependencies\": [\n            \"Salary Slip\"\n        ],\n        \"doctype\": \"Salary Slip\",\n        \"is_query_report\": true,\n        \"label\": \"Wage Register Report\",\n        \"name\": \"Wage Register Report\",\n        \"type\": \"report\"\n    }\n]"
+  }
+ ],
+ "category": "Modules",
+ "charts": [],
+ "creation": "2020-12-18 10:31:12.999453",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Desk Page",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "idx": 0,
+ "is_standard": 1,
+ "label": "Client",
+ "modified": "2020-12-22 23:39:52.169640",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Client",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "",
+   "label": "Client",
+   "link_to": "Client",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Client Invoice",
+   "link_to": "Client Invoice",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Site",
+   "link_to": "Site",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Timesheet",
+   "link_to": "Timesheet",
+   "type": "DocType"
+  }
+ ]
+}

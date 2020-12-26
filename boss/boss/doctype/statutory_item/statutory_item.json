@@ -1,0 +1,100 @@
+{
+ "actions": [],
+ "creation": "2020-12-22 20:14:08.707569",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "salary_slip",
+  "month",
+  "year",
+  "basic_and_da",
+  "column_break_5",
+  "pf",
+  "esi",
+  "pt",
+  "bonus"
+ ],
+ "fields": [
+  {
+   "columns": 2,
+   "fieldname": "salary_slip",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Salary Slip",
+   "options": "Salary Slip",
+   "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "month",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Month",
+   "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "year",
+   "fieldtype": "Data",
+   "label": "Year"
+  },
+  {
+   "columns": 2,
+   "fieldname": "basic_and_da",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Basic + DA",
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "columns": 1,
+   "fieldname": "pf",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "PF",
+   "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "esi",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "ESI",
+   "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "pt",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "PT",
+   "search_index": 1
+  },
+  {
+   "columns": 1,
+   "fieldname": "bonus",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Retention Bonus",
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2020-12-22 20:37:48.604568",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Statutory Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,339 @@
+<h2 class="text-center">{%= __("FORM 26") %}</h2>
+<h2 class="text-center">{%= __("WAGE REGISTER") %}</h2>
+{%
+	var report_columns = report.get_columns_for_print();
+%}
+<style>
+	td {
+		font-size: 11px;
+	}
+
+	th {
+		font-size: 9px;
+	}
+
+	.center {
+		margin-left: auto;
+		margin-right: auto;
+	}
+</style>
+<meta name="pdfkit-orientation" content="landscape">
+<table border="1" class="center">
+	<tr>
+		<td colspan="10">
+			<center>Rate of Minimum wages and since the date</center>
+		</td>
+		<td colspan="2">Date</td>
+	</tr>
+	<tr>
+		<td colspan="4"></td>
+		<td colspan="2">Highly Skilled</td>
+		<td colspan="2">Skilled</td>
+		<td colspan="2">Semi Skilled</td>
+		<td colspan="2">Unskilled</td>
+	</tr>
+	<tr>
+		<td colspan="4">Minimum Basic</td>
+		<td colspan="2">831.00</td>
+		<td colspan="2">764.00</td>
+		<td colspan="2">695.00</td>
+		<td colspan="2">629.00</td>
+	</tr>
+	<tr>
+		<td colspan="4">DA</td>
+		<td colspan="8">Include in Minimum Basic</td>
+	</tr>
+	<tr>
+		<td colspan="4">Overtime</td>
+		<td colspan="8">Double the rate of wages</td>
+	</tr>
+</table>
+<br>
+<table border="1">
+	<tr>
+		<td colspan="2">Name and Address of Contractor:</td>
+		<td colspan="2">Boss Management Services Pvt Ltd<br>41/2, Senthamizh Nagar, 1st Street, Mogappair, Ch - 600 037.</td>
+		<td colspan="2">Name and Address of Principal employer </td>
+		<td colspan="2">Neyveli Lignite Corporation </td>
+		<td colspan="2">Name of the Owner </td>
+		<td colspan="2"></td>
+	</tr>
+	<tr>
+		<td colspan="2">Wage Period</td>
+		<td colspan="2">From: {%= filters.from_date %} <br>To: {%= filters.to_date %} </td>
+		<td colspan="4">(Monthly/Fortnight/Weekly/Daily/Piece Rated </td>
+		<td colspan="2">Work order</td>
+		<td colspan="2">25869172 </td>
+
+	</tr>
+
+</table>
+
+<hr>
+{%
+					var report_columns = report.get_columns_for_print();
+				%}
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>Employee ID</th>
+			<th>Name</th>
+			<th>Rate of Wages</th>
+			<th>No.of Days Worked</th>
+			<th>Overtime Hours Worked</th>
+			<th>Basic</th>
+			<th>Spl. Basic</th>
+			<th>DA</th>
+			<th>OT Payment</th>
+			<th>HRA</th>
+			<th>Other Allowance</th>
+			<th>Incentive</th>
+			<th>Arrear Basic</th>
+			<th>Misc Credit</th>
+			<th>Total</th>
+			<th>PF</th>
+			<th>ESIC</th>
+			<th>Society</th>
+			<th>IT</th>
+			<th>Insurance</th>
+			<th>Others</th>
+			<th>Recoveries</th>
+			<th>PTax</th>
+			<th>LWF</th>
+			<th>Misc.Ded.</th>
+			<th>Total</th>
+			<th>Net Payment</th>
+			<th>Employee share PF Welfare</th>
+			<th>Receipt by Employee</th>
+			<th>Date of Payment</th>
+			<th>Remarks</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for(var j=0, k=data.length; j<k; j++) { %}
+		{% var row = data[j]; %}
+		<tr>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Employee') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Employee Name') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Rate Of Wages') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Payment Days') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Total Working Hours') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Basic') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Special Basic') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Dearness Allowance') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Payment Overtime') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'House Rent Allowance') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Other Allowance') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Incentive') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Arrear Basic') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Misc. Credit') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Gross Pay') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Provident Fund') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'ESIC') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Society') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Income Tax') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Insurance') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Others') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Recoveries') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">PTAX
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Labour Welfare Fund') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'MISC DED') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Total Deduction') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">
+				{% for(var i=1, l=32; i<l; i++) { %}
+				{% var fieldname = report_columns[i].fieldname; %}
+				{% if (fieldname == 'Net Pay') { %}
+				{%=  row[fieldname] %}
+				{% } %}
+				{% } %}
+			</td>
+			<td class="text-left">Employee Share PF Welfare
+			</td>
+			<td class="text-left">Receipt by Employee
+			</td>
+			<td class="text-left">Date of Payment
+			</td>
+			<td class="text-left">Remarks
+			</td>
+
+		</tr>
+		{% } %}
+	</tbody>
+</table>
