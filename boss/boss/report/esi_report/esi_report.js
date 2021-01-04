@@ -8,7 +8,7 @@ frappe.query_reports["ESI Report"] = {
             "fieldname": "from_date",
             "label": __("From Date"),
             "fieldtype": "Date",
-            "default": [frappe.datetime.add_months(frappe.datetime.get_(),-1)],
+            "default": [frappe.datetime.add_months(frappe.datetime.get_today(),-1)],
             "reqd": 1
         },
         {
@@ -18,5 +18,18 @@ frappe.query_reports["ESI Report"] = {
             "default": [frappe.datetime.add_months(frappe.datetime.get_today())],
             "reqd": 1
         },
+        {
+			"fieldname": "client",
+			"label": __("Client"),
+			"fieldtype": "Link",
+			"options": "Client"
+
+		},
+		{
+			"fieldname": "site",
+			"label": __("Site"),
+			"fieldtype": "Link",
+			"options": "Site",
+		}
     ]
 };

@@ -1,0 +1,299 @@
+{
+ "actions": [],
+ "autoname": "BR-.#####",
+ "creation": "2020-12-29 21:28:22.265092",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "client_employee_no",
+  "client",
+  "site",
+  "date_of_join",
+  "column_break_5",
+  "posting_date",
+  "company",
+  "salary_slip",
+  "payment_date",
+  "paid",
+  "section_break_9",
+  "start_date",
+  "end_date",
+  "column_break_12",
+  "total_working_hours",
+  "hour_rate",
+  "section_break_15",
+  "total_working_days",
+  "absent_days",
+  "column_break_18",
+  "payment_days",
+  "section_break_20",
+  "pf_number",
+  "esi_number",
+  "column_break_24",
+  "bank_name",
+  "bank_account_no",
+  "ifsc_no",
+  "section_break_29",
+  "gross_pay",
+  "cost_to_company",
+  "column_break_31",
+  "total_deduction",
+  "net_pay",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fetch_from": "salary_slip.employee",
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "salary_slip.client_name",
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Client",
+   "options": "Client"
+  },
+  {
+   "fetch_from": "salary_slip.site",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Site",
+   "options": "Site"
+  },
+  {
+   "fetch_from": "salary_slip.date_of_join",
+   "fieldname": "date_of_join",
+   "fieldtype": "Date",
+   "label": "Date of Join"
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "salary_slip",
+   "fieldtype": "Link",
+   "label": "Salary Slip",
+   "options": "Salary Slip",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_9",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "salary_slip.start_date",
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "salary_slip.end_date",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "salary_slip.total_working_hours",
+   "fieldname": "total_working_hours",
+   "fieldtype": "Float",
+   "label": "Total Working Hours"
+  },
+  {
+   "fetch_from": "salary_slip.hour_rate",
+   "fieldname": "hour_rate",
+   "fieldtype": "Currency",
+   "label": "Hour Rate"
+  },
+  {
+   "fieldname": "section_break_15",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "salary_slip.total_working_days",
+   "fieldname": "total_working_days",
+   "fieldtype": "Data",
+   "label": "Total Working Days"
+  },
+  {
+   "fetch_from": "salary_slip.absent_days",
+   "fieldname": "absent_days",
+   "fieldtype": "Data",
+   "label": "Absent Days"
+  },
+  {
+   "fieldname": "column_break_18",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "salary_slip.payment_days",
+   "fieldname": "payment_days",
+   "fieldtype": "Data",
+   "label": "Payment Days"
+  },
+  {
+   "fieldname": "section_break_20",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fetch_from": "salary_slip.gross_pay",
+   "fieldname": "gross_pay",
+   "fieldtype": "Currency",
+   "label": "Gross Pay"
+  },
+  {
+   "fetch_from": "salary_slip.total_deduction",
+   "fieldname": "total_deduction",
+   "fieldtype": "Currency",
+   "label": "Total Deduction"
+  },
+  {
+   "fetch_from": "salary_slip.net_pay",
+   "fieldname": "net_pay",
+   "fieldtype": "Currency",
+   "label": "Net Pay"
+  },
+  {
+   "fieldname": "column_break_24",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "salary_slip.bank_name",
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fetch_from": "salary_slip.bank_account_no",
+   "fieldname": "bank_account_no",
+   "fieldtype": "Data",
+   "label": "Bank Account No"
+  },
+  {
+   "fetch_from": "salary_slip.ifsc_no",
+   "fieldname": "ifsc_no",
+   "fieldtype": "Data",
+   "label": "IFSC No"
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "fieldname": "paid",
+   "fieldtype": "Check",
+   "label": "Paid"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "payment_date",
+   "fieldtype": "Date",
+   "in_standard_filter": 1,
+   "label": "Payment Date"
+  },
+  {
+   "fetch_from": "salary_slip.pf_number",
+   "fieldname": "pf_number",
+   "fieldtype": "Data",
+   "label": "PF Number"
+  },
+  {
+   "fetch_from": "salary_slip.esi_number",
+   "fieldname": "esi_number",
+   "fieldtype": "Data",
+   "label": "ESI Number"
+  },
+  {
+   "fieldname": "section_break_29",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_31",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "salary_slip.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Employee Name"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Bank Remittance",
+   "print_hide": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_to_company",
+   "fieldtype": "Currency",
+   "label": "Cost to Company"
+  },
+  {
+   "fetch_from": "employee.client_employee_no",
+   "fieldname": "client_employee_no",
+   "fieldtype": "Data",
+   "label": "Client Employee No",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2021-01-02 16:00:27.167537",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Bank Remittance",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "title_field": "employee",
+ "track_changes": 1
+}

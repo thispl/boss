@@ -23,6 +23,7 @@ def execute(filters=None):
     salary_slips = get_salary_slips(conditions, filters)
 
     for ss in salary_slips:
+        row = []
         esino = frappe.db.get_value(
             "Employee", {'employee': ss.employee}, ['esi_number'])
         if esino:
@@ -40,6 +41,18 @@ def execute(filters=None):
         else:
             row += [0]
 
+        client = frappe.db.get_value("Employee", {'employee': ss.employee}, ['client'])
+        if client:
+            row += [client]
+        else:
+            row += [0]
+
+        site = frappe.db.get_value("Employee", {'employee': ss.employee}, ['site'])
+        if site:
+            row += [site]
+        else:
+            row += [0]
+
         if ss.md:
             row += [ss.md]
         else:
@@ -52,9 +65,9 @@ def execute(filters=None):
         esic = frappe.db.get_value(
             "Salary Detail", {'abbr': 'ESI', 'parent': ss.name}, ['amount'])
         if esic:
-            row += [esic]
+            row += [esic,"",""]
         else:
-            row += [""]
+            row += ["","",""]
 
         # eesi = round(ss.gp * 0.0325)
         # if eesi:
@@ -62,8 +75,8 @@ def execute(filters=None):
         # else:
         #     row += [""]
 
-        if row[5]:
-            data.append(row)
+        # if row[5]:
+        data.append(row)
 
     return columns, data
 
@@ -71,8 +84,10 @@ def execute(filters=None):
 def get_columns():
     columns = [
         _("ESI Number") + ":Data:120",
-        _("Employee") + ":Data:50",
-        _("Employee Name") + ":Data:90",
+        _("Employee") + ":Data:120",
+        _("Employee Name") + ":Data:120",
+        _("Client") + ":Data:100",
+        _("Site") + ":Data:100",
         _("Payment Days") + ":Int:50",
         _("Gross Pay") + ":Currency:100",
         _("ESI") + ":Currency:100",
@@ -85,7 +100,7 @@ def get_columns():
 
 
 def get_salary_slips(conditions, filters):
-    salary_slips = frappe.db.sql("""select ss.employee as employee,ss.employee_name as employee_name,ss.name as name,ss.payment_days as md,ss.gross_pay as gp from `tabSalary Slip` as ss 
+    salary_slips = frappe.db.sql("""select ss.employee as employee,ss.employee_name as employee_name,ss.name as name,ss.payment_days as md,ss.gross_pay as gp from `tabSalary Slip` ss 
     where %s order by employee""" % conditions, filters, as_dict=1)
     return salary_slips
 
@@ -96,5 +111,7 @@ def get_conditions(filters):
         conditions += "start_date >= %(from_date)s"
     if filters.get("to_date"):
         conditions += " and end_date >= %(to_date)s"
+    if filters.get("client"): conditions += " and client_name = %(client)s"
+    if filters.get("site"): conditions += " and site = %(site)s"
 
     return conditions, filters

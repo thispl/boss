@@ -56,7 +56,7 @@ def get_columns(salary_slips):
         _("Salary Slip ID") + ":Link/Salary Slip:150",_("Employee") + ":Link/Employee:120", _("Employee Name") + "::140",
         _("Date of Joining") + "::80", _("Client") + ":Link/Client:-1", _("Site") + ":Link/Site:-1",
         _("Designation") + ":Link/Designation:-1", _("Company") + ":Link/Company:120", _("Start Date") + "::80",
-        _("End Date") + "::80", _("Total Working Days") + ":Float:-1", _("Payment Days") + ":Float:120" , _("Total Working Hours") + ":Float:120"
+        _("End Date") + "::80", _("Cal Days") + ":Float:-1", _("Payment Days") + ":Float:120" , _("Total Working Hours") + ":Float:120"
     ]
 
     salary_components = {_("Earning"): [], _("Deduction"): []}

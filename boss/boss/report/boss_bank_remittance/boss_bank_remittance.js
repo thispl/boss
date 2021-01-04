@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["PF Report"] = {
+frappe.query_reports["BOSS Bank Remittance"] = {
 	"filters": [
         {
             "fieldname": "from_date",
@@ -30,6 +30,13 @@ frappe.query_reports["PF Report"] = {
 			"label": __("Site"),
 			"fieldtype": "Link",
 			"options": "Site",
+		},
+		{
+			"fieldname": "docstatus",
+			"label": __("Document Status"),
+			"fieldtype": "Select",
+			"options": ["Draft", "Submitted", "Cancelled"],
+			"default": "Draft"
 		}
     ]
 };

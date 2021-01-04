@@ -7,6 +7,7 @@
  "field_order": [
   "employee",
   "employee_name",
+  "client_employee_no",
   "date_of_join",
   "get_details",
   "column_break_5",
@@ -93,11 +94,18 @@
    "fieldname": "gratuity_amount",
    "fieldtype": "Currency",
    "label": "Gratuity Amount"
+  },
+  {
+   "fetch_from": "employee.client_employee_no",
+   "fieldname": "client_employee_no",
+   "fieldtype": "Data",
+   "label": "Client Employee No",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-12-22 20:35:36.545250",
+ "modified": "2021-01-02 16:00:05.016936",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Statutory Detail",

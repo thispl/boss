@@ -62,8 +62,8 @@ def get_frequency_kwargs(frequency_name):
 	return frequency_dict.get(frequency_name)
 	
 @frappe.whitelist()
-def invoice_item(start_date,end_date,company):
-	salary_Slip = frappe.get_all('Salary Slip',{'company':company,'start_date':start_date,'end_date':end_date},['name','total_working_hours','hour_rate','start_date'])
+def invoice_item(start_date,end_date,company,client,site):
+	salary_Slip = frappe.get_all('Salary Slip',{'company':company,'client_name':client,'site':site,'start_date':start_date,'end_date':end_date},['name','total_working_hours','hour_rate','start_date'])
 	ot_hours = 0
 	ot_amount = 0
 	ctc_amount = 0
@@ -71,7 +71,7 @@ def invoice_item(start_date,end_date,company):
 	emp_count = len(salary_Slip)
 	for ss in salary_Slip:
 		date = ss.start_date
-		month = date.strftime("%B")
+		month = date.strftime("%B-%Y")
 		salary_detail = frappe.get_all('Salary Detail',{'parent':ss.name},['*'])		
 		for sd in salary_detail:
 			if sd.salary_component == "Cost to Company":

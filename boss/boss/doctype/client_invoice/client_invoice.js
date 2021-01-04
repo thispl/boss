@@ -43,7 +43,9 @@ frappe.ui.form.on('Client Invoice', {
 			args: {
 				start_date: frm.doc.start_date,
 				end_date: frm.doc.end_date,
-				company: frm.doc.company_name
+				company: frm.doc.company_name,
+				client: frm.doc.client_name,
+				site: frm.doc.site
 			},
 			callback: function (r) {
 				if (r.message) {

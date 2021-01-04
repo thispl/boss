@@ -1,0 +1,135 @@
+{
+ "actions": [],
+ "autoname": "AOR-.#####",
+ "creation": "2020-12-29 12:04:27.004318",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "client",
+  "site",
+  "column_break_5",
+  "posting_date",
+  "company",
+  "payment_days",
+  "ot_hours",
+  "section_break_10",
+  "start_date",
+  "column_break_12",
+  "end_date",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.client",
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Client",
+   "options": "Client",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.site",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Site",
+   "options": "Site",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_5",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Today",
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "reqd": 1
+  },
+  {
+   "default": "Company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payment_days",
+   "fieldtype": "Int",
+   "label": "Payment Days",
+   "reqd": 1
+  },
+  {
+   "fieldname": "ot_hours",
+   "fieldtype": "Float",
+   "label": "OT Hours"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Attendance and OT Register",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2020-12-29 17:08:13.866193",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Attendance and OT Register",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

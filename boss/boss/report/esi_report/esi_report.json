@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2020-12-21 11:00:07.192596",
  "disable_prepared_report": 0,
@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2020-12-21 11:00:07.192596",
+ "modified": "2020-12-29 10:52:02.545719",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "ESI Report",

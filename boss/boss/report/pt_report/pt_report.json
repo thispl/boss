@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [],
  "creation": "2020-12-21 14:43:32.173938",
  "disable_prepared_report": 0,
@@ -9,7 +9,7 @@
  "filters": [],
  "idx": 0,
  "is_standard": "Yes",
- "modified": "2020-12-22 14:34:12.710583",
+ "modified": "2020-12-29 10:51:55.377358",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "PT Report",

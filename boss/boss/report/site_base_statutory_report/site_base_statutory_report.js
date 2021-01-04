@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["PF Report"] = {
+frappe.query_reports["Site Base Statutory Report"] = {
 	"filters": [
         {
             "fieldname": "from_date",

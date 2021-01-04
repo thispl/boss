@@ -23,6 +23,7 @@ def execute(filters=None):
     salary_slips = get_salary_slips(conditions, filters)
 
     for ss in salary_slips:
+        row = []
         # employee = frappe.db.get_value(
         #     "Employee", {'employee': ss.employee}, ['esi_number'])
         # if esino:
@@ -31,12 +32,24 @@ def execute(filters=None):
         #     row = [0]
 
         if ss.employee:
-            row += [ss.employee]
+            row = [ss.employee]
         else:
-            row += [0]
+            row = [0]
 
         if ss.employee_name:
             row += [ss.employee_name]
+        else:
+            row += [0]
+
+        client = frappe.db.get_value("Employee", {'employee': ss.employee}, ['client'])
+        if client:
+            row += [client]
+        else:
+            row += [0]
+
+        site = frappe.db.get_value("Employee", {'employee': ss.employee}, ['site'])
+        if site:
+            row += [site]
         else:
             row += [0]
 
@@ -64,8 +77,10 @@ def execute(filters=None):
 
 def get_columns():
     columns = [
-        _("Employee") + ":Data:50",
-        _("Employee Name") + ":Data:90",
+        _("Employee") + ":Data:120",
+        _("Employee Name") + ":Data:120",
+        _("Client") + ":Data:100",
+        _("Site") + ":Data:100",
         _("Payment Days") + ":Int:50",
         _("Gross Pay") + ":Currency:100",
         _("PT") + ":Currency:100"
@@ -86,5 +101,7 @@ def get_conditions(filters):
         conditions += "start_date >= %(from_date)s"
     if filters.get("to_date"):
         conditions += " and end_date >= %(to_date)s"
+    if filters.get("client"): conditions += " and client_name = %(client)s"
+    if filters.get("site"): conditions += " and site = %(site)s"
 
     return conditions, filters

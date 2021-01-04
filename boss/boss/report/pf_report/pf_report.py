@@ -24,8 +24,8 @@ def execute(filters=None):
     edlic = 0
     salary_slips = get_salary_slips(conditions, filters)
     for ss in salary_slips:
-        pfno = frappe.db.get_value(
-            "Employee", {'employee': ss.employee}, ['pf_number'])
+        row = []
+        pfno = frappe.db.get_value("Employee", {'employee': ss.employee}, ['pf_number'])
         if pfno:
             row += [pfno]
         else:
@@ -41,6 +41,18 @@ def execute(filters=None):
         else:
             row += [0]
 
+        client = frappe.db.get_value("Employee", {'employee': ss.employee}, ['client'])
+        if client:
+            row += [client]
+        else:
+            row += [0]
+
+        site = frappe.db.get_value("Employee", {'employee': ss.employee}, ['site'])
+        if site:
+            row += [site]
+        else:
+            row += [0]
+        
         if ss.gp:
             row += [ss.gp]
         else:
@@ -52,7 +64,7 @@ def execute(filters=None):
             epsw = flt(15000)
             if epsw < basic:
                 row += [basic, basic, epsw]
-            else:
+            elif epsw > basic:
                 row += [basic, basic, basic]
         else:
             row += [0, 0, 0]
@@ -65,26 +77,28 @@ def execute(filters=None):
         else:
             epf = 0
             row += [0]
+        
         if basic:
+            eps = 0
             eps = round(basic*0.0833)
             if eps and epf > 0:
                 row += [eps]
-            else:
-                row += [0]
+        else:
+            row += [0]
+
         ee = round(epf-eps)
         if ee > 0:
             row += [ee]
         else:
             row += [0]
 
-        if ss.lop:
-            row += [ss.lop]
+        if ss.ab:
+            row += [ss.ab,""]
         else:
-            row += [0]
+            row += [0,""]
 
-        if row[9]:
-            data.append(row)
-
+           
+        data.append(row)
     return columns, data
 
 
@@ -93,7 +107,8 @@ def get_columns():
         _("UAN Number") + ":Data:120",
         _("Employee") + ":Data:80",
         _("Employee Name") + ":Data:90",
-        # _("Emp Category") + ":Data:100",
+        _("Client") + ":Data:100",
+        _("Site") + ":Data:100",
         _("Gross Pay") + ":Currency:100",
         _("EPF Wages") + ":Currency:100",
         _("EPS Wages") + ":Currency:100",
@@ -102,13 +117,15 @@ def get_columns():
         _("EPS Contribution") + ":Currency:100",
         _("Difference EPF & EPS ") + ":Currency:100",
         _("NCP Days ") + ":Data:100",
-        _("Refund of Advances") + ":Currency:100"
+        _("Refund of Advances") + ":Currency:100",
+
+
     ]
     return columns
 
 
 def get_salary_slips(conditions, filters):
-    salary_slips = frappe.db.sql("""select ss.employee as employee,ss.employee_name as employee_name, ss.name as name,ss.absent_days as lop,ss.gross_pay as gp from `tabSalary Slip` as ss 
+    salary_slips = frappe.db.sql("""select ss.employee as employee,ss.employee_name as employee_name,  ss.name as name,ss.absent_days as ab,ss.gross_pay as gp from `tabSalary Slip` ss 
     where %s order by employee""" % conditions, filters, as_dict=1)
     return salary_slips
 
@@ -119,5 +136,7 @@ def get_conditions(filters):
         conditions += " start_date >= %(from_date)s"
     if filters.get("to_date"):
         conditions += " and end_date >= %(to_date)s"
+    if filters.get("client"): conditions += " and client_name = %(client)s"
+    if filters.get("site"): conditions += " and site = %(site)s"
 
     return conditions, filters

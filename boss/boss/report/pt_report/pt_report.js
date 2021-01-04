@@ -18,5 +18,18 @@ frappe.query_reports["PT Report"] = {
             "default": [frappe.datetime.add_months(frappe.datetime.get_today())],
             "reqd": 1
         },
+        {
+			"fieldname": "client",
+			"label": __("Client"),
+			"fieldtype": "Link",
+			"options": "Client"
+
+		},
+		{
+			"fieldname": "site",
+			"label": __("Site"),
+			"fieldtype": "Link",
+			"options": "Site",
+		}
     ]
 };
