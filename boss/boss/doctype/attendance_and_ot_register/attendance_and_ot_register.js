@@ -19,4 +19,64 @@ frappe.ui.form.on('Attendance and OT Register', {
 			}
 		});
 	},
+	before_save: function (frm) {
+		if (frm.doc.employee == null && frm.doc.client_employee_no) {
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.get_employee',
+				args: {
+					client_id: frm.doc.client_employee_no
+				},
+				callback: function (r) {
+					if (r.message) {
+						frm.set_value('employee', r.message);
+					}
+				}
+			});
+		}
+	},
+	client_employee_no: function (frm) {
+		if (frm.doc.employee == null) {
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.get_employee',
+				args: {
+					client_id: frm.doc.client_employee_no
+				},
+				callback: function (r) {
+					if (r.message) {
+						frm.set_value('employee', r.message);
+					}
+				}
+			});
+		}
+	},
+	after_save: function (frm) {
+		if(frm.doc.canteen) {
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_canteen_salary',
+				args: {
+					canteen: frm.doc.canteen_charges,
+					payroll_date: frm.doc.start_date,
+					employee : frm.doc.employee
+				},
+				callback: function (r) {
+					if (r.message) {
+					}
+				}
+			});
+		}
+		if(frm.doc.transport) {
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_transport_salary',
+				args: {
+					transport: frm.doc.transport_charges,
+					payroll_date: frm.doc.start_date,
+					employee : frm.doc.employee
+				},
+				callback: function (r) {
+					if (r.message) {
+					}
+				}
+			});
+		}
+	}
 });

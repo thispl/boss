@@ -37,3 +37,40 @@ def get_frequency_kwargs(frequency_name):
 		'daily': {'days': 1}
 	}
 	return frequency_dict.get(frequency_name)
+
+@frappe.whitelist()
+def get_employee(client_id):
+	employee = frappe.db.get_value("Employee",{"client_employee_no":client_id},["name"])
+	return employee
+
+@frappe.whitelist()
+def create_canteen_salary(canteen,payroll_date,employee):
+	additional_salary = frappe.db.get_value("Additional Salary",{"employee":employee,"salary_component": "Canteen Charges","payroll_date": payroll_date},["name"])
+	if not additional_salary:
+		additional_salary = frappe.new_doc('Additional Salary')
+		additional_salary.update({
+			"employee": employee,
+			"payroll_date": payroll_date,
+			"salary_component": "Canteen Charges",
+			"amount": int(canteen),
+			"overwrite_salary_structure_amount": "1"
+		})
+		additional_salary.save(ignore_permissions=True)
+		additional_salary.submit()
+		frappe.db.commit()
+
+@frappe.whitelist()
+def create_transport_salary(transport,payroll_date,employee):
+	additional_salary = frappe.db.get_value("Additional Salary",{"employee":employee,"salary_component": "Transport Charges","payroll_date": payroll_date},["name"])
+	if not additional_salary:
+		additional_salary = frappe.new_doc('Additional Salary')
+		additional_salary.update({
+			"employee": employee,
+			"payroll_date": payroll_date,
+			"salary_component": "Transport Charges",
+			"amount": int(transport),
+			"overwrite_salary_structure_amount": "1"
+		})
+		additional_salary.save(ignore_permissions=True)
+		additional_salary.submit()
+		frappe.db.commit()
