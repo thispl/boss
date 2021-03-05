@@ -50,7 +50,7 @@ frappe.ui.form.on('Attendance and OT Register', {
 		}
 	},
 	after_save: function (frm) {
-		if(frm.doc.canteen) {
+		if(frm.doc.canteen_charges > 0) {
 			frappe.call({
 				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_canteen_salary',
 				args: {
@@ -64,7 +64,7 @@ frappe.ui.form.on('Attendance and OT Register', {
 				}
 			});
 		}
-		if(frm.doc.transport) {
+		if(frm.doc.transport_charges > 0) {
 			frappe.call({
 				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_transport_salary',
 				args: {

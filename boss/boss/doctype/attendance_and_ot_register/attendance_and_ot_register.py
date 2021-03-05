@@ -12,7 +12,46 @@ import functools
 from datetime import datetime, timedelta
 
 class AttendanceandOTRegister(Document):
-	pass
+	def validate(self):
+		self.get_employee_no()
+		self.canteen_salary()
+		self.transport_salary()
+	
+	def get_employee_no(self):
+		employee = frappe.db.get_value("Employee",{"client_employee_no":self.client_employee_no},["name"])
+		self.employee = employee
+	
+	def canteen_salary(self):
+		additional_salary = frappe.db.get_value("Additional Salary",{"employee":self.employee,"salary_component": "Canteen Charges","payroll_date": self.start_date},["name"])
+		if not additional_salary:
+			if self.canteen_charges > 0:
+				additional_salary = frappe.new_doc('Additional Salary')
+				additional_salary.update({
+					"employee": self.employee,
+					"payroll_date": self.start_date,
+					"salary_component": "Canteen Charges",
+					"amount": int(self.canteen_charges),
+					"overwrite_salary_structure_amount": "1"
+				})
+				additional_salary.save(ignore_permissions=True)
+				additional_salary.submit()
+				frappe.db.commit()
+
+	def transport_salary(self):
+		additional_salary = frappe.db.get_value("Additional Salary",{"employee":self.employee,"salary_component": "Transport Charges","payroll_date": self.start_date},["name"])
+		if not additional_salary:
+			if self.transport_charges > 0:
+				additional_salary = frappe.new_doc('Additional Salary')
+				additional_salary.update({
+					"employee": self.employee,
+					"payroll_date": self.start_date,
+					"salary_component": "Transport Charges",
+					"amount": int(self.transport_charges),
+					"overwrite_salary_structure_amount": "1"
+				})
+				additional_salary.save(ignore_permissions=True)
+				additional_salary.submit()
+				frappe.db.commit()
 
 
 @frappe.whitelist()

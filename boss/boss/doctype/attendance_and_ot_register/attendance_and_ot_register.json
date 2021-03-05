@@ -11,8 +11,6 @@
   "employee_name",
   "client",
   "site",
-  "canteen",
-  "transport",
   "column_break_5",
   "posting_date",
   "company",
@@ -31,15 +29,16 @@
    "fieldname": "employee",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Employee",
-   "options": "Employee",
-   "reqd": 1
+   "options": "Employee"
   },
   {
    "fetch_from": "employee.client",
    "fieldname": "client",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Client",
    "options": "Client",
    "reqd": 1
@@ -49,6 +48,7 @@
    "fieldname": "site",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Site",
    "options": "Site",
    "reqd": 1
@@ -73,12 +73,14 @@
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "payment_days",
-   "fieldtype": "Int",
+   "fieldtype": "Float",
    "label": "Payment Days",
    "reqd": 1
   },
   {
+   "default": "0",
    "fieldname": "ot_hours",
    "fieldtype": "Float",
    "label": "OT Hours"
@@ -116,6 +118,7 @@
    "fetch_from": "employee.client_employee_no",
    "fieldname": "client_employee_no",
    "fieldtype": "Data",
+   "in_standard_filter": 1,
    "label": "Client Employee No"
   },
   {
@@ -127,24 +130,12 @@
   },
   {
    "default": "0",
-   "fieldname": "canteen",
-   "fieldtype": "Check",
-   "label": "Canteen"
-  },
-  {
-   "default": "0",
-   "fieldname": "transport",
-   "fieldtype": "Check",
-   "label": "Transport"
-  },
-  {
-   "depends_on": "eval:doc.canteen == 1",
    "fieldname": "canteen_charges",
    "fieldtype": "Currency",
    "label": "Canteen Charges"
   },
   {
-   "depends_on": "eval:doc.transport == 1",
+   "default": "0",
    "fieldname": "transport_charges",
    "fieldtype": "Currency",
    "label": "Transport Charges"
@@ -153,7 +144,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-01-20 12:20:47.786995",
+ "modified": "2021-02-23 16:53:37.699760",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Attendance and OT Register",

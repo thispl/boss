@@ -35,10 +35,11 @@ def execute(filters=None):
         if ss.designation is not None: columns[5] = columns[5].replace('-1','120')
         # if ss.working_days is not None: columns[9] = columns[9].replace('-1','130')
 
-        basic_da = frappe.db.get_value("Employee", {'employee': ss.employee}, ['basic_and_da'])
-        frappe.errprint(basic_da)
-        if basic_da:
-            row += [basic_da]
+        fixed_basic_da = 0
+        fixed_basic_da = frappe.db.get_value("Employee", {'employee': ss.employee}, ['basic_and_da'])
+        frappe.errprint(fixed_basic_da)
+        if fixed_basic_da:
+            row += [fixed_basic_da]
         else:
             row += [0]
 
@@ -84,9 +85,9 @@ def execute(filters=None):
         # row.append(ss.total_loan_repayment)
 
         if currency == company_currency:
-            row += [flt(ss.total_deduction) * flt(ss.exchange_rate), flt(ss.net_pay) * flt(ss.exchange_rate)]
+            row += [flt(ss.total_deduction) * flt(ss.exchange_rate), flt(ss.net_pay) * flt(ss.exchange_rate),ss.bank_account_no,ss.ifsc_no,ss.pf_number,ss.esi_number]
         else:
-            row += [ss.total_deduction, ss.net_pay]
+            row += [ss.total_deduction, ss.net_pay,ss.bank_account_no,ss.ifsc_no,ss.pf_number,ss.esi_number]
         row.append(currency or company_currency)
         data.append(row)
 
@@ -125,10 +126,10 @@ def get_columns(salary_slips):
         _("Cal Days") + ":Float:120",
         _("Absent Days") + ":Float:120",
         _("Payment Days") + ":Float:120",
-        _("Basic") + "::80",
-        _("HRA") + "::80",
-        _("LWW") + "::80",
-        _("Statutory Bonus") + "::80",
+        _("Fixed Basic") + "::80",
+        _("Fixed HRA") + "::80",
+        _("Fixed LWW") + "::80",
+        _("Fixed Statutory Bonus") + "::80",
         # _("Total") + "::80"
     ]
 
@@ -142,7 +143,8 @@ def get_columns(salary_slips):
 
     columns = columns + [(e + ":Currency:120") for e in salary_components[_("Earning")]] + \
         [_("Gross Pay") + ":Currency:120"] + [(d + ":Currency:120") for d in salary_components[_("Deduction")]] + \
-        [_("Total Deduction") + ":Currency:120", _("Net Pay") + ":Currency:120"]
+        [_("Total Deduction") + ":Currency:120", _("Net Pay") + ":Currency:120",_("Account No") + ":Data:120",_("IFSC No") + ":Data:120"
+        ,_("PF No") + ":Data:120",_("ESI No") + ":Data:120"]
 
     return columns, salary_components[_("Earning")], salary_components[_("Deduction")]
 
