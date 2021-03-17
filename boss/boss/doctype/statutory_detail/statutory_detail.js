@@ -4,12 +4,12 @@
 frappe.ui.form.on('Statutory Detail', {
 	// refresh: function(frm) {
 
-	// }
+	// },
 	get_details: function (frm) {
 		frappe.call({
 			method: 'boss.boss.doctype.statutory_detail.statutory_detail.statutory_item',
 			args: {
-				employee: frm.doc.employee,
+				employee: frm.doc.employee
 			},
 			callback: function (r) {
 				if (r.message) {
@@ -30,7 +30,7 @@ frappe.ui.form.on('Statutory Detail', {
 			}
 		});
 	},
-	employee(frm) {
+	employee: function (frm){
 		var age = calculate_age(frm.doc.date_of_join)
 		console.log("age")
 		console.log(age)

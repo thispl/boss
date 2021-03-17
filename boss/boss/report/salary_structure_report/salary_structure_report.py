@@ -65,6 +65,7 @@ def get_salary_structure(conditions,filters):
         """,emp.name,as_dict=1)
         if st_name:
             ss = st_name[0]
+            # precision = 0
             frappe.errprint(ss)
             salary_component = frappe.db.sql("""select salary_component,abbr,amount,amount_based_on_formula,formula from 
             `tabSalary Detail` where parent = %s """,ss.salary_structure,as_dict=1)
@@ -101,7 +102,9 @@ def get_salary_structure(conditions,filters):
                             frappe.errprint(formula)
                             frappe.errprint(whitelisted_globals)
                             frappe.errprint(data)
-                            amount = flt(frappe.safe_eval(formula, whitelisted_globals, data), sc.precision("amount"))
+                            amount_1 = sc.abbr("amount")
+                            frappe.errprint(amount_1)
+                            amount = flt(frappe.safe_eval(formula, whitelisted_globals, data), sc.abbr("amount"))
                             frappe.errprint(amount)
                 if amount:
                     data[sc.abbr] = amount

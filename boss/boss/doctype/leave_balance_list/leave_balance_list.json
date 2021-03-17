@@ -1,0 +1,74 @@
+{
+ "actions": [],
+ "creation": "2021-03-12 17:07:51.483794",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "leave_type",
+  "total_allocated_leaves",
+  "used_leaves",
+  "column_break_4",
+  "leave_balance",
+  "encashment_days"
+ ],
+ "fields": [
+  {
+   "fieldname": "leave_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Leave Type",
+   "options": "Leave Type",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "leave_balance",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Leave Balance",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "encashment_days",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Encashment Days",
+   "search_index": 1
+  },
+  {
+   "fieldname": "total_allocated_leaves",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Total Allocated Leaves",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "used_leaves",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Used Leaves",
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2021-03-12 21:43:09.835794",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Leave Balance List",
+ "owner": "Administrator",
+ "permissions": [],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

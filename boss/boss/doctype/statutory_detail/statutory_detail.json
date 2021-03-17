@@ -1,24 +1,25 @@
 {
  "actions": [],
- "creation": "2020-12-22 20:18:32.085752",
+ "autoname": "field:employee",
+ "creation": "2020-12-16 15:15:53.660601",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
   "employee",
   "employee_name",
-  "client_employee_no",
   "date_of_join",
   "get_details",
-  "column_break_5",
+  "column_break_4",
   "posting_date",
   "company",
   "employment_age",
   "calculate_gratuity",
-  "section_break_10",
+  "section_break_7",
   "item",
-  "section_break_12",
-  "gratuity_amount"
+  "section_break_10",
+  "gratuity_amount",
+  "column_break_12"
  ],
  "fields": [
   {
@@ -27,19 +28,22 @@
    "in_list_view": 1,
    "label": "Employee",
    "options": "Employee",
-   "reqd": 1
+   "reqd": 1,
+   "unique": 1
   },
   {
    "fetch_from": "employee.employee_name",
    "fieldname": "employee_name",
    "fieldtype": "Data",
-   "label": "Employee Name"
+   "label": "Employee Name",
+   "read_only": 1
   },
   {
    "fetch_from": "employee.date_of_joining",
    "fieldname": "date_of_join",
    "fieldtype": "Date",
-   "label": "Date of Join"
+   "label": "Date of Join",
+   "read_only": 1
   },
   {
    "fieldname": "get_details",
@@ -47,19 +51,13 @@
    "label": "Get Details"
   },
   {
-   "fieldname": "column_break_5",
-   "fieldtype": "Column Break"
-  },
-  {
    "default": "Today",
    "fieldname": "posting_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "Posting Date",
-   "reqd": 1
+   "label": "Posting Date"
   },
   {
-   "fetch_from": "employee.company",
+   "default": "default company",
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
@@ -68,10 +66,12 @@
   {
    "fieldname": "employment_age",
    "fieldtype": "Int",
-   "label": "Employment Age"
+   "label": "Employment Age",
+   "read_only": 1,
+   "read_only_depends_on": "employee"
   },
   {
-   "depends_on": "employment_age >= \"5\"",
+   "depends_on": "eval:doc.employment_age >= \"5\" ",
    "fieldname": "calculate_gratuity",
    "fieldtype": "Button",
    "label": "Calculate Gratuity"
@@ -87,25 +87,26 @@
    "options": "Statutory Item"
   },
   {
-   "fieldname": "section_break_12",
-   "fieldtype": "Section Break"
-  },
-  {
    "fieldname": "gratuity_amount",
    "fieldtype": "Currency",
    "label": "Gratuity Amount"
   },
   {
-   "fetch_from": "employee.client_employee_no",
-   "fieldname": "client_employee_no",
-   "fieldtype": "Data",
-   "label": "Client Employee No",
-   "read_only": 1
+   "fieldname": "column_break_4",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_7",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_12",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-01-02 16:00:05.016936",
+ "modified": "2021-03-17 18:59:05.917095",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Statutory Detail",
