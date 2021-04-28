@@ -78,5 +78,19 @@ frappe.ui.form.on('Attendance and OT Register', {
 				}
 			});
 		}
+		if(frm.doc.advance_deduction > 0) {
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_salary_advance',
+				args: {
+					advance: frm.doc.advance_deduction,
+					payroll_date: frm.doc.start_date,
+					employee : frm.doc.employee
+				},
+				callback: function (r) {
+					if (r.message) {
+					}
+				}
+			});
+		}
 	}
 });

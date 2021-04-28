@@ -20,6 +20,7 @@ def statutory_item(employee):
 	frappe.errprint("hi")
 	ss_dict = {}
 	salary_slip = frappe.get_all('Salary Slip',{'employee':employee},['name','start_date','end_date','total_working_hours','hour_rate'])
+	frappe.errprint(salary_slip)
 	basic = 0
 	da = 0
 	pf = 0

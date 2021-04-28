@@ -11,6 +11,7 @@
   "employee_name",
   "client",
   "site",
+  "advance_deduction",
   "column_break_5",
   "posting_date",
   "company",
@@ -139,12 +140,18 @@
    "fieldname": "transport_charges",
    "fieldtype": "Currency",
    "label": "Transport Charges"
+  },
+  {
+   "default": "0",
+   "fieldname": "advance_deduction",
+   "fieldtype": "Currency",
+   "label": "Advance Deduction"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-02-23 16:53:37.699760",
+ "modified": "2021-04-17 18:27:19.747197",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Attendance and OT Register",
@@ -165,5 +172,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
+ "title_field": "employee",
  "track_changes": 1
 }
