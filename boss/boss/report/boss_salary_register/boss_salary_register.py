@@ -43,6 +43,20 @@ def execute(filters=None):
         else:
             row += [0]
 
+        fixed_da = frappe.db.get_value("Employee", {'employee': ss.employee}, ['da'])
+        frappe.errprint(fixed_da)
+        if fixed_da:
+            row += [fixed_da]
+        else:
+            row += [0]
+
+        fixed_other_all = frappe.db.get_value("Employee", {'employee': ss.employee}, ['other_allowance'])
+        frappe.errprint(fixed_other_all)
+        if fixed_other_all:
+            row += [fixed_other_all]
+        else:
+            row += [0]
+
         house_rent_allowance = frappe.db.get_value("Employee", {'employee': ss.employee}, ['house_rent_allowance'])
         frappe.errprint(house_rent_allowance)
         if house_rent_allowance:
@@ -127,6 +141,8 @@ def get_columns(salary_slips):
         _("Absent Days") + ":Float:120",
         _("Payment Days") + ":Float:120",
         _("Fixed Basic") + "::80",
+        _("Fixed DA") + "::80",
+        _("Fixed Other Allowance") + "::80",
         _("Fixed HRA") + "::80",
         _("Fixed LWW") + "::80",
         _("Fixed Statutory Bonus") + "::80",

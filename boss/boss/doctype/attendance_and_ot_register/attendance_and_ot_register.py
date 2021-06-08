@@ -19,8 +19,9 @@ class AttendanceandOTRegister(Document):
         self.create_advance_deduction()
     
     def get_employee_no(self):
-        employee = frappe.db.get_value("Employee",{"client_employee_no":self.client_employee_no},["name"])
-        self.employee = employee
+        if self.employee == None:
+            employee = frappe.db.get_value("Employee",{"client_employee_no":self.client_employee_no},["name"])
+            self.employee = employee
     
     def canteen_salary(self):
         additional_salary = frappe.db.get_value("Additional Salary",{"employee":self.employee,"salary_component": "Canteen Charges","payroll_date": self.start_date},["name"])
