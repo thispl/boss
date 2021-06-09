@@ -1,0 +1,121 @@
+{
+ "actions": [],
+ "autoname": "field:client_name",
+ "creation": "2020-12-14 15:52:56.920652",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "client_name",
+  "address",
+  "gst_no",
+  "pan_no",
+  "column_break_6",
+  "bank_name",
+  "account_number",
+  "ifsc_no",
+  "phone_no",
+  "site_details",
+  "section_break_10",
+  "contact_details"
+ ],
+ "fields": [
+  {
+   "fieldname": "client_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Client Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Address"
+  },
+  {
+   "fieldname": "gst_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "GST No",
+   "length": 15,
+   "unique": 1
+  },
+  {
+   "fieldname": "pan_no",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "PAN No",
+   "length": 10,
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_6",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank Name"
+  },
+  {
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account Number",
+   "unique": 1
+  },
+  {
+   "fieldname": "ifsc_no",
+   "fieldtype": "Data",
+   "label": "IFSC No"
+  },
+  {
+   "fieldname": "phone_no",
+   "fieldtype": "Data",
+   "label": "Phone No",
+   "unique": 1
+  },
+  {
+   "fieldname": "site_details",
+   "fieldtype": "Table",
+   "label": "Site Details",
+   "options": "Site List"
+  },
+  {
+   "fieldname": "section_break_10",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "contact_details",
+   "fieldtype": "Table",
+   "label": "Contact Details",
+   "options": "Contact Details"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2021-06-09 14:36:05.986790",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Client",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "quick_entry": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}
