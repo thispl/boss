@@ -43,11 +43,11 @@ frappe.ui.form.on('Client Invoice', {
 			args: {
 				start_date: frm.doc.start_date,
 				end_date: frm.doc.end_date,
-				company: frm.doc.company_name,
 				client: frm.doc.client_name,
 				site: frm.doc.site
 			},
 			callback: function (r) {
+				console.log(r.message[2])
 				if (r.message) {
 					frm.add_child('items', {
 						item: 'Manpower Deployment charges',
@@ -75,14 +75,14 @@ frappe.ui.form.on('Client Invoice', {
 					frm.set_value('tax_amount', r.message[6]+r.message[6]);
 					frm.set_value('grand_total', r.message[7]);
 					frm.set_value('total_in_words', r.message[9]);				
-					console.log(r.message[0])
-					console.log(r.message[1])
-					console.log(r.message[2])
-					console.log(r.message[3])
-					console.log(r.message[4])
-					console.log(r.message[5])
-					console.log(r.message[6])
-					console.log(r.message[7])
+					// console.log(r.message[0])
+					// console.log(r.message[1])
+					// console.log(r.message[2])
+					// console.log(r.message[3])
+					// console.log(r.message[4])
+					// console.log(r.message[5])
+					// console.log(r.message[6])
+					// console.log(r.message[7])
 					// frm.set_value('end_date', r.message.end_date);
 				}
 			}

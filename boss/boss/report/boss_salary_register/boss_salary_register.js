@@ -2,7 +2,7 @@
 // For license information, please see license.txt
 /* eslint-disable */
 
-frappe.query_reports["BOSS Salary Register"] = {
+frappe.query_reports["Boss Salary Register"] = {
 	"filters": [
 		{
 			"fieldname":"from_date",
@@ -20,14 +20,6 @@ frappe.query_reports["BOSS Salary Register"] = {
 			"reqd": 1,
 			"width": "100px"
 		},
-		// {
-		// 	"fieldname": "currency",
-		// 	"fieldtype": "Link",
-		// 	"options": "Currency",
-		// 	"label": __("Currency"),
-		// 	"default": erpnext.get_currency(frappe.defaults.get_default("Company")),
-		// 	"width": "50px"
-		// },
 		{
 			"fieldname":"employee",
 			"label": __("Employee"),
@@ -58,13 +50,13 @@ frappe.query_reports["BOSS Salary Register"] = {
 			"width": "100px",
 			"reqd": 1
 		},
-		{
-			"fieldname":"docstatus",
-			"label":__("Document Status"),
-			"fieldtype":"Select",
-			"options":["Draft", "Submitted", "Cancelled"],
-			"default": "Draft",
-			"width": "100px"
-		}
+		// {
+		// 	"fieldname":"docstatus",
+		// 	"label":__("Document Status"),
+		// 	"fieldtype":"Select",
+		// 	"options":["Draft", "Submitted", "Cancelled"],
+		// 	"default": "Draft",
+		// 	"width": "100px"
+		// }
 	]
 };

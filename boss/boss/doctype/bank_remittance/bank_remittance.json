@@ -74,7 +74,7 @@
    "options": "Site"
   },
   {
-   "fetch_from": "salary_slip.date_of_join",
+   "fetch_from": "salary_slip.date_of_joning",
    "fieldname": "date_of_join",
    "fieldtype": "Date",
    "label": "Date of Join"
@@ -229,7 +229,7 @@
    "label": "PF Number"
   },
   {
-   "fetch_from": "salary_slip.esi_number",
+   "fetch_from": "salary_slip.esi_no",
    "fieldname": "esi_number",
    "fieldtype": "Data",
    "label": "ESI Number"
@@ -273,7 +273,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-01-02 16:00:27.167537",
+ "modified": "2022-03-09 13:42:56.805656",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Bank Remittance",

@@ -23,6 +23,7 @@ def execute(filters=None):
     salary_slips = get_salary_slips(conditions, filters)
 
     for ss in salary_slips:
+        frappe.errprint(ss)
         row = []
 
         if ss.np:
@@ -31,7 +32,7 @@ def execute(filters=None):
             row += [0]
 
         if not ss.ifsc:
-            ss.ifsc = frappe.db.get_value("Employee", {'employee': ss.employee}, ['ifsc_no'])
+            ss.ifsc = frappe.db.get_value("Employee", {'employee': ss.employee}, ['ifsc_code'])
         if ss.ifsc:
             row += ["0300102000016056",ss.ifsc]
         else:
@@ -139,8 +140,7 @@ def get_columns():
 
 def get_salary_slips(conditions, filters):
     salary_slips = frappe.db.sql("""select ss.name as name,ss.employee as employee,ss.employee_name as employee_name,
-    ss.payment_days as pd,ss.net_pay as np,ss.bank_name as bank_name,ss.bank_account_no as acc_no
-    ,ss.ifsc_no as ifsc from `tabSalary Slip` ss 
+    ss.payment_days as pd,ss.net_pay as np,ss.bank_name as bank_name,ss.bank_account_no as acc_no,ss.ifsc_no as ifsc_no from `tabSalary Slip` ss 
     where %s order by employee""" % conditions, filters, as_dict=1)
     return salary_slips
 

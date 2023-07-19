@@ -1,0 +1,86 @@
+{
+ "actions": [],
+ "creation": "2021-10-06 10:51:39.823646",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "report",
+  "site",
+  "from_date",
+  "client",
+  "section_break_3",
+  "company",
+  "to_date",
+  "download"
+ ],
+ "fields": [
+  {
+   "fieldname": "report",
+   "fieldtype": "Select",
+   "label": "Report",
+   "options": "Form-26\nCommon Register\nDSV Register"
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date"
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "download",
+   "fieldtype": "Button",
+   "label": "Download"
+  },
+  {
+   "fieldname": "section_break_3",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "label": "Client",
+   "options": "Client"
+  },
+  {
+   "depends_on": "eval:doc.report=='DSV Register'",
+   "fieldname": "site",
+   "fieldtype": "Link",
+   "label": "Site",
+   "options": "Site"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2021-12-10 15:51:30.671601",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Report Dashboard",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

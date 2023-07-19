@@ -24,15 +24,14 @@ def execute(filters=None):
 
     for ss in salary_slips:
         row = []
-        esino = frappe.db.get_value(
-            "Employee", {'employee': ss.employee}, ['esi_number'])
+        esino = frappe.db.get_value("Employee", {'employee': ss.employee}, ['esic_no'])
         if esino:
             row = [esino]
         else:
             row = [0]
 
         if ss.employee:
-            row += [ss.employee]
+            row += [ss.employee]    
         else:
             row += [0]
 
@@ -63,7 +62,7 @@ def execute(filters=None):
         else:
             row += [0]
         esic = frappe.db.get_value(
-            "Salary Detail", {'abbr': 'ESI', 'parent': ss.name}, ['amount'])
+            "Salary Detail", {'abbr': 'ESIC', 'parent': ss.name}, ['amount'])
         if esic:
             row += [esic,"",""]
         else:

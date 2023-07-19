@@ -14,7 +14,7 @@
   "client_pan_number",
   "column_break_4",
   "posting_date",
-  "company_name",
+  "company",
   "address",
   "gst_number",
   "pan_number",
@@ -64,14 +64,6 @@
   {
    "fieldname": "column_break_4",
    "fieldtype": "Column Break"
-  },
-  {
-   "default": "Boss Management Services",
-   "fieldname": "company_name",
-   "fieldtype": "Link",
-   "label": "Company Name",
-   "options": "Client",
-   "reqd": 1
   },
   {
    "fieldname": "section_break_7",
@@ -221,11 +213,17 @@
    "fieldtype": "Data",
    "label": "Total in Words",
    "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-12-28 21:10:22.884418",
+ "modified": "2022-03-02 18:49:09.770168",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Client Invoice",

@@ -10,8 +10,10 @@ from datetime import datetime, timedelta
 @frappe.whitelist()
 def bank_remittance(salary_slip_id):
     bank_remittance = frappe.db.get_value("Bank Remittance",{"salary_slip":salary_slip_id},["name"])
+    # print(bank_remittance)
     if not bank_remittance:
         salary_detail = frappe.get_all('Salary Detail',{'parent':salary_slip_id},['*'])
+        print(salary_detail)     
         ctc_amount = 0
         for sd in salary_detail:
             if sd.salary_component == "Cost to Company":
@@ -24,3 +26,4 @@ def bank_remittance(salary_slip_id):
         salary_slip.save(ignore_permissions=True)
         salary_slip.submit()
         frappe.db.commit()
+

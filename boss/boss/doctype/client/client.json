@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_rename": 1,
  "autoname": "field:client_name",
  "creation": "2020-12-14 15:52:56.920652",
  "doctype": "DocType",
@@ -10,6 +11,7 @@
   "address",
   "gst_no",
   "pan_no",
+  "company",
   "column_break_6",
   "bank_name",
   "account_number",
@@ -91,11 +93,18 @@
    "fieldtype": "Table",
    "label": "Contact Details",
    "options": "Contact Details"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2021-06-09 14:36:05.986790",
+ "modified": "2022-02-24 16:42:56.872217",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Client",
@@ -114,8 +123,8 @@
    "write": 1
   }
  ],
- "quick_entry": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
- "track_changes": 1
+ "track_changes": 1,
+ "track_seen": 1
 }

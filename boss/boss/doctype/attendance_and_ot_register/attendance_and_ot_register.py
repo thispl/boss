@@ -3,6 +3,7 @@
 # For license information, please see license.txt
 
 from __future__ import unicode_literals
+from calendar import weekday
 import frappe
 from frappe.model.document import Document
 from dateutil.relativedelta import relativedelta
@@ -15,8 +16,8 @@ class AttendanceandOTRegister(Document):
     def validate(self):
         self.get_employee_no()
         self.canteen_salary()
-        self.transport_salary()
-        self.create_advance_deduction()
+        # self.transport_salary()
+        self.create_advance_deduction() 
     
     def get_employee_no(self):
         if self.employee == None:
@@ -147,3 +148,39 @@ def create_salary_advance(advance,payroll_date,employee):
         additional_salary.save(ignore_permissions=True)
         additional_salary.submit()
         frappe.db.commit()
+
+@frappe.whitelist()
+def create_week_off(week_off,payroll_date,employee):
+    additional_salary = frappe.db.get_value('Additional Salary',{'employee':employee,'salary_component':'Week Off','payroll_date':payroll_date},['name'])
+    if not additional_salary:
+        additional_salary  = frappe.new_doc('Additional Salary')
+        additional_salary.update({
+            'employee':employee,
+            'payroll_date':payroll_date,
+            'salary_component':'Week Off',
+            'amount':int(week_off),
+            'overwrite_salary_structure_amount':'1'
+        })
+        additional_salary.save(ignore_permissions=True)
+        additional_salary.submit()
+        frappe.db.commit()
+
+@frappe.whitelist()
+def create_night_shift_allowance(night_shift_allowance,payroll_date,employee):
+    additional_salary = frappe.db.get_value('Additional Salary',{'employee':employee,'salary_component':'Night Shift Allowance','payroll_date':payroll_date},['name'])
+    if not additional_salary:
+        additional_salary  = frappe.new_doc('Additional Salary')
+        additional_salary.update({
+            'employee':employee,
+            'payroll_date':payroll_date,
+            'salary_component':'Night Shift Allowance',
+            'amount':int(night_shift_allowance),
+            'overwrite_salary_structure_amount':'1'
+        })
+        additional_salary.save(ignore_permissions=True)
+        additional_salary.submit()
+        frappe.db.commit()
+
+
+
+    

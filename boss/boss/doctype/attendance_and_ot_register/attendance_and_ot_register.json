@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "AOR-.#####",
  "creation": "2020-12-29 12:04:27.004318",
  "doctype": "DocType",
@@ -12,6 +13,8 @@
   "client",
   "site",
   "advance_deduction",
+  "week_off",
+  "night_shift_allowance",
   "column_break_5",
   "posting_date",
   "company",
@@ -19,6 +22,7 @@
   "ot_hours",
   "canteen_charges",
   "transport_charges",
+  "additional_working_days",
   "section_break_10",
   "start_date",
   "column_break_12",
@@ -67,6 +71,7 @@
   },
   {
    "default": "Company",
+   "fetch_from": "employee.company",
    "fieldname": "company",
    "fieldtype": "Link",
    "label": "Company",
@@ -146,12 +151,27 @@
    "fieldname": "advance_deduction",
    "fieldtype": "Currency",
    "label": "Advance Deduction"
+  },
+  {
+   "fieldname": "week_off",
+   "fieldtype": "Currency",
+   "label": "Week Off"
+  },
+  {
+   "fieldname": "night_shift_allowance",
+   "fieldtype": "Currency",
+   "label": "Night Shift Allowance"
+  },
+  {
+   "fieldname": "additional_working_days",
+   "fieldtype": "Data",
+   "label": "Additional Working Days"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2021-04-17 18:27:19.747197",
+ "modified": "2022-03-08 19:19:55.451351",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Attendance and OT Register",

@@ -1,229 +1,108 @@
 # Copyright (c) 2013, TeamPRO and contributors
 # For license information, please see license.txt
 
-from __future__ import unicode_literals
-import frappe, erpnext
-from frappe.utils import flt
-from frappe import _
+from logging import basicConfig
+import frappe
+from datetime import date, timedelta
+from frappe import get_request_header, msgprint, _
+from frappe.utils import cstr, cint, getdate
+from frappe.utils import cstr, add_days, date_diff, getdate, get_last_day,get_first_day
+from datetime import date, timedelta, datetime
 
 def execute(filters=None):
-    if not filters: filters = {}
-    currency = None
-    
-    if filters.get('currency'):
-        currency = filters.get('currency')
-    company_currency = erpnext.get_company_currency(filters.get("company"))
-    salary_slips = get_salary_slips(filters, company_currency)
-    if not salary_slips: return [], []
+	columns, data = [], []
+	columns = get_columns()
+	data = get_data(filters)
+	return columns, data
 
-    columns, earning_types, ded_types = get_columns(salary_slips)
-    ss_earning_map = get_ss_earning_map(salary_slips, currency, company_currency)
-    ss_ded_map = get_ss_ded_map(salary_slips,currency, company_currency)
-    doj_map = get_employee_doj_map()
 
-    data = []
-    for ss in salary_slips:
-        basic_da = 0
-        house_rent_allowance = 0
-        leave_with_wages = 0
-        statutory_bonus = 0
-        row = [ss.name, ss.employee, ss.employee_name, doj_map.get(ss.employee), ss.client_name, ss.site, ss.designation,
-            ss.company, ss.start_date, ss.end_date, ss.total_working_days, ss.absent_days, ss.payment_days]
+def get_columns():
+	columns = [
+		_("Salary Slip ID") + ":Link/Salary Slip:100", _("Employee") + ":Link/Employee:100",_('Employee Name') +':Data:100',_('Date of Joining') +':Data:100',
 
-        if ss.client_name is not None: columns[3] = columns[3].replace('-1','120')
-        if ss.site is not None: columns[4] = columns[4].replace('-1','120')
-        if ss.designation is not None: columns[5] = columns[5].replace('-1','120')
-        # if ss.working_days is not None: columns[9] = columns[9].replace('-1','130')
+		_('Client Name') +':Data:100',_('Site') +':Data:100',_('Designation')+':Data:100',_('Company') +':Data:100',_('Start Date') +':Data:100',
 
-        fixed_basic_da = 0
-        fixed_basic_da = frappe.db.get_value("Employee", {'employee': ss.employee}, ['basic_and_da'])
-        frappe.errprint(fixed_basic_da)
-        if fixed_basic_da:
-            row += [fixed_basic_da]
-        else:
-            row += [0]
+		_('End Date')+':Data:100',_('Cal Days') +':Data:100',_('Absent Days') +':Data:100',_('Payment Days') +':Data:100',
 
-        fixed_da = frappe.db.get_value("Employee", {'employee': ss.employee}, ['da'])
-        frappe.errprint(fixed_da)
-        if fixed_da:
-            row += [fixed_da]
-        else:
-            row += [0]
+		_(' Fixed Basic') +':Data:100',_('Fixed Dearness Allowance') +':Data:100',_('Fixed HRA') +':Data:100',_('Fixed Other Allowance') +':Data:100',
+		
+		_('Fixed LWW') +':Data:100',_('Fixed Special Allowance') +':Data:100',('Fixed Service Charge') +':Data:100',_('Fixed Advance Bonus') +':Data',
 
-        fixed_other_all = frappe.db.get_value("Employee", {'employee': ss.employee}, ['other_allowance'])
-        frappe.errprint(fixed_other_all)
-        if fixed_other_all:
-            row += [fixed_other_all]
-        else:
-            row += [0]
+		_('Attendance Bonus') +':Data:100',_('Fixed OT Rate') +':Data:100',_('Fixed Conveyance') +':Data:100',_('Fixed Statutory Bonus') +':Data:100',	
 
-        house_rent_allowance = frappe.db.get_value("Employee", {'employee': ss.employee}, ['house_rent_allowance'])
-        frappe.errprint(house_rent_allowance)
-        if house_rent_allowance:
-            row += [house_rent_allowance]
-        else:
-            row += [0]
-        
-        leave_with_wages = frappe.db.get_value("Employee", {'employee': ss.employee}, ['leave_with_wages'])
-        frappe.errprint(leave_with_wages)
-        if leave_with_wages:
-            row += [leave_with_wages]
-        else:
-            row += [0]
+		_('Fixed Canteen Allowance') +':Data:100',_('Fixed Transportation Allowance') +':Data:100',_('Fixed Uniform Allowance') +':Data:100',
 
-        statutory_bonus = frappe.db.get_value("Employee", {'employee': ss.employee}, ['statutory_bonus'])
-        frappe.errprint(statutory_bonus)
-        if statutory_bonus:
-            row += [statutory_bonus]
-        else:
-            row += [0]
+		_('Basic') +':Data:100',_('HRA') +':Datta:100',_('DA') +':Data:100',_('OA') +':Data:100',_('Special Allowance') +':Data:100',
+		
+		_('Service Charge') +':Data:100',_('Cantenn Allowace') +':Data:100',
 
-        # total = 0
-        # total = basic_da + house_rent_allowance + leave_with_wages + statutory_bonus
-        # if total:
-        #     row += [total]
-        # else:
-        #     row += [0]
+		_('LWW') +':Data:100',_('Employer ESIC') +':Data:100',_('Employer PF') +':Data:100',_('Uniform Allowance') +':Data:100',
 
-        for e in earning_types:
-            row.append(ss_earning_map.get(ss.name, {}).get(e))
+		_('Statutory Bonus') +':Data:100',_('Night Shift Allownace') +':Data:100',_('Over Time') +':Data:100',_('Week Off') +':Data:100',_('Gross Pay') +':Data:100',
 
-        if currency == company_currency:
-            row += [flt(ss.gross_pay) * flt(ss.exchange_rate)]
-        else:
-            row += [ss.gross_pay]
+		_('ESI') +':Data:100',_('Professional Tax') +':Data:100',_('Employee PF') +':Data:100',_('Total Deduction') +':Data:100',_('Net Pay') +':Data:100',
 
-        for d in ded_types:
-            row.append(ss_ded_map.get(ss.name, {}).get(d))
+		_('Account No') +':Data:100',_('IFSC NO') +':Data:100',_('PF NO') +':Data:100',_('ESI NO') +':Data:100'
+	]
+	return columns
 
-        # row.append(ss.total_loan_repayment)
+def get_data(filters):
+	data = []
+	if filters.employee:
+		salary_slip = frappe.db.get_all('Salary Slip',{'employee':filters.employee,'start_date':filters.from_date},['*'])
+	elif filters.client_name:
+		salary_slip = frappe.db.get_all('Salary Slip',{'client_name':filters.client_name,'start_date':filters.from_date},['*'])
+	elif filters.site:
+		salary_slip = frappe.db.get_all('Salary Slip',{'site':filters.site,'start_date':filters.from_date},['*'])
+	elif filters.company:
+		salary_slip = frappe.db.get_all('Salary Slip',{'company':filters.company,'start_date':filters.from_date},['*'])	
+	else:
+		salary_slip = frappe.db.get_all('Salary Slip',{'start_date':filters.from_date},['*'])
+	
+	for ss in salary_slip:
+		emp = frappe.get_doc('Employee',ss.employee,['*'])
+		
+		basic = frappe.db.get_value('Salary Detail',{'abbr':'B','parent':ss.name},'amount')
+		hra = frappe.db.get_value('Salary Detail',{'abbr':'HRA','parent':ss.name},'amount')
+		da = frappe.db.get_value('Salary Detail',{'abbr':'DA','parent':ss.name},'amount')
+		oa = frappe.db.get_value('Salary Detail',{'abbr':'OA','parent':ss.name},'amount')
+		sa = frappe.db.get_value('Salary Detail',{'abbr':'SA','parent':ss.name},'amount')
+		sc = frappe.db.get_value('Salary Detail',{'abbr':'SC','parent':ss.name},'amount')
+		ca = frappe.db.get_value('Salary Detail',{'abbr':'CA','parent':ss.name},'amount')
+		lww = frappe.db.get_value('Salary Detail',{'abbr':'LWW','parent':ss.name},'amount')
+		essic = frappe.db.get_value('Salary Detail',{'abbr':'EESIC','parent':ss.name},'amount')
+		epf = frappe.db.get_value('Salary Detail',{'abbr':'EPF','parent':ss.name},'amount')
+		ua = frappe.db.get_value('Salary Detail',{'abbr':'UA','parent':ss.name},'amount')
+		sb = frappe.db.get_value('Salary Detail',{'abbr':'SB','parent':ss.name},'amount')
+		nsa = frappe.db.get_value('Salary Detail',{'abbr':'NSA','parent':ss.name},'amount')
+		ot = frappe.db.get_value('Salary Detail',{'abbr':'OT','parent':ss.name},'amount')
+		wo = frappe.db.get_value('Salary Detail',{'abbr':'WO','parent':ss.name},'amount')
+		esi = frappe.db.get_value('Salary Detail',{'abbr':'ESIC','parent':ss.name},'amount')
+		pt = frappe.db.get_value('Salary Detail',{'abbr':'PT','parent':ss.name},'amount')
+		pf = frappe.db.get_value('Salary Detail',{'abbr':'PF','parent':ss.name},'amount')
+		
+		row = [
+			ss.name,ss.employee,ss.employee_name,ss.date_of_joning,ss.client_name,ss.site,emp.designation,ss.company,ss.start_date,ss.end_date,
+			ss.total_working_days,ss.absent_days,ss.payment_days,emp.basic,emp.dearness_allowance,emp.house_rent_allowance,emp.other_allowance,
+			emp.lww,emp.special_allowance,emp.service_charge,emp.advance_bonus,emp.attendance_bonus,emp.ot_rate,emp.conveyance,emp.statutory_bonus,
+			emp.canteen_allowance,emp.transportation_allowance,emp.uniform_allowance,basic,hra,oa,da,sa,sc,ca,lww,essic,epf,ua,sb,nsa,ot,wo,
+			ss.gross,esi,pt,pf,ss.total_deduction,ss.net_pay,ss.bank_account_no,ss.ifsc_no,ss.pf_number,ss.esi_no
+		]	
+		data.append(row)
+	return data
 
-        if currency == company_currency:
-            row += [flt(ss.total_deduction) * flt(ss.exchange_rate), flt(ss.net_pay) * flt(ss.exchange_rate),ss.bank_account_no,ss.ifsc_no,ss.pf_number,ss.esi_number]
-        else:
-            row += [ss.total_deduction, ss.net_pay,ss.bank_account_no,ss.ifsc_no,ss.pf_number,ss.esi_number]
-        row.append(currency or company_currency)
-        data.append(row)
+# def get_conditions(filters):
+#     conditions = ""
+#     doc_status = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
 
-    return columns, data
+#     if filters.get("docstatus"):
+#         conditions += "docstatus = {0}".format(doc_status[filters.get("docstatus")])
 
-def get_columns(salary_slips):
-    """
-    columns = [
-        _("Salary Slip ID") + ":Link/Salary Slip:150",
-        _("Employee") + ":Link/Employee:120",
-        _("Employee Name") + "::140",
-        _("Date of Joining") + "::80",
-        _("Client Name") + ":Link/Client:120",
-        _("Site") + ":Link/Site:120",
-        _("Designation") + ":Link/Designation:120",
-        _("Company") + ":Link/Company:120",
-        _("Start Date") + "::80",
-        _("End Date") + "::80",
-        _("Cal Days") + ":Float:130",
-        _("Absent Days") + ":Float:130",
-        _("Payment Days") + ":Float:120",
-        _("Currency") + ":Link/Currency:80"
-    ]
-    """
-    columns = [
-        _("Salary Slip ID") + ":Link/Salary Slip:150",
-        _("Employee") + ":Link/Employee:120",
-        _("Employee Name") + "::140",
-        _("Date of Joining") + "::80",
-        _("Client Name") + ":Link/Client::80",
-        _("Site") + ":Link/Site::80",
-        _("Designation") + ":Link/Designation:120",
-        _("Company") + ":Link/Company:120",
-        _("Start Date") + "::80",
-        _("End Date") + "::80",
-        _("Cal Days") + ":Float:120",
-        _("Absent Days") + ":Float:120",
-        _("Payment Days") + ":Float:120",
-        _("Fixed Basic") + "::80",
-        _("Fixed DA") + "::80",
-        _("Fixed Other Allowance") + "::80",
-        _("Fixed HRA") + "::80",
-        _("Fixed LWW") + "::80",
-        _("Fixed Statutory Bonus") + "::80",
-        # _("Total") + "::80"
-    ]
+#     if filters.get("from_date"): conditions += " and start_date >= %(from_date)s"
+#     if filters.get("to_date"): conditions += " and end_date <= %(to_date)s"
+#     if filters.get("company"): conditions += " and company = %(company)s"
+#     if filters.get("employee"): conditions += " and employee = %(employee)s"
+#     if filters.get("client_name"): conditions += " and client_name = %(client_name)s"
+#     if filters.get("site"): conditions += " and site = %(site)s"
 
-    salary_components = {_("Earning"): [], _("Deduction"): []}
-
-    for component in frappe.db.sql("""select distinct sd.salary_component, sc.type
-        from `tabSalary Detail` sd, `tabSalary Component` sc
-        where sc.name=sd.salary_component and sd.amount != 0 and sd.parent in (%s)""" %
-        (', '.join(['%s']*len(salary_slips))), tuple([d.name for d in salary_slips]), as_dict=1):
-        salary_components[_(component.type)].append(component.salary_component)
-
-    columns = columns + [(e + ":Currency:120") for e in salary_components[_("Earning")]] + \
-        [_("Gross Pay") + ":Currency:120"] + [(d + ":Currency:120") for d in salary_components[_("Deduction")]] + \
-        [_("Total Deduction") + ":Currency:120", _("Net Pay") + ":Currency:120",_("Account No") + ":Data:120",_("IFSC No") + ":Data:120"
-        ,_("PF No") + ":Data:120",_("ESI No") + ":Data:120"]
-
-    return columns, salary_components[_("Earning")], salary_components[_("Deduction")]
-
-def get_salary_slips(filters, company_currency):
-    filters.update({"from_date": filters.get("from_date"), "to_date":filters.get("to_date")})
-    conditions, filters = get_conditions(filters, company_currency)
-    salary_slips = frappe.db.sql("""select * from `tabSalary Slip` where %s
-        order by employee""" % conditions, filters, as_dict=1)
-
-    return salary_slips or []
-
-def get_conditions(filters, company_currency):
-    conditions = ""
-    doc_status = {"Draft": 0, "Submitted": 1, "Cancelled": 2}
-
-    if filters.get("docstatus"):
-        conditions += "docstatus = {0}".format(doc_status[filters.get("docstatus")])
-
-    if filters.get("from_date"): conditions += " and start_date >= %(from_date)s"
-    if filters.get("to_date"): conditions += " and end_date <= %(to_date)s"
-    if filters.get("company"): conditions += " and company = %(company)s"
-    if filters.get("employee"): conditions += " and employee = %(employee)s"
-    if filters.get("client_name"): conditions += " and client_name = %(client_name)s"
-    if filters.get("site"): conditions += " and site = %(site)s"
-    # if filters.get("currency") and filters.get("currency") != company_currency:
-    # 	conditions += " and currency = %(currency)s"
-
-    return conditions, filters
-
-def get_employee_doj_map():
-    return	frappe._dict(frappe.db.sql("""
-                SELECT
-                    employee,
-                    date_of_joining
-                FROM `tabEmployee`
-                """))
-
-def get_ss_earning_map(salary_slips, currency, company_currency):
-    ss_earnings = frappe.db.sql("""select sd.parent, sd.salary_component, sd.amount, ss.exchange_rate, ss.name
-        from `tabSalary Detail` sd, `tabSalary Slip` ss where sd.parent=ss.name and sd.parent in (%s)""" %
-        (', '.join(['%s']*len(salary_slips))), tuple([d.name for d in salary_slips]), as_dict=1)
-
-    ss_earning_map = {}
-    for d in ss_earnings:
-        ss_earning_map.setdefault(d.parent, frappe._dict()).setdefault(d.salary_component, [])
-        if currency == company_currency:
-            ss_earning_map[d.parent][d.salary_component] = flt(d.amount) * flt(d.exchange_rate if d.exchange_rate else 1)
-        else:
-            ss_earning_map[d.parent][d.salary_component] = flt(d.amount)
-
-    return ss_earning_map
-
-def get_ss_ded_map(salary_slips, currency, company_currency):
-    ss_deductions = frappe.db.sql("""select sd.parent, sd.salary_component, sd.amount, ss.exchange_rate, ss.name
-        from `tabSalary Detail` sd, `tabSalary Slip` ss where sd.parent=ss.name and sd.parent in (%s)""" %
-        (', '.join(['%s']*len(salary_slips))), tuple([d.name for d in salary_slips]), as_dict=1)
-
-    ss_ded_map = {}
-    for d in ss_deductions:
-        ss_ded_map.setdefault(d.parent, frappe._dict()).setdefault(d.salary_component, [])
-        if currency == company_currency:
-            ss_ded_map[d.parent][d.salary_component] = flt(d.amount) * flt(d.exchange_rate if d.exchange_rate else 1)
-        else:
-            ss_ded_map[d.parent][d.salary_component] = flt(d.amount)
-
-    return ss_ded_map
+	

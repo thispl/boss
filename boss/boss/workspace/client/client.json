@@ -1,0 +1,170 @@
+{
+ "category": "Modules",
+ "charts": [],
+ "creation": "2020-12-18 10:31:12.999453",
+ "developer_mode_only": 0,
+ "disable_user_customization": 0,
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "extends_another_page": 0,
+ "hide_custom": 0,
+ "idx": 0,
+ "is_default": 0,
+ "is_standard": 1,
+ "label": "Client",
+ "links": [
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Client",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Client",
+   "link_to": "Client",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Site",
+   "link_to": "Site",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Client Invoice",
+   "link_to": "Client Invoice",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Custom",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Attendance and OT Register",
+   "link_to": "Attendance and OT Register",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Full and Final Settlement",
+   "link_to": "Full and Final Settlement",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Bank Remittance",
+   "link_to": "Bank Remittance",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 0,
+   "label": "Reports",
+   "link_type": "DocType",
+   "onboard": 0,
+   "type": "Card Break"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "PF Report",
+   "link_to": "PF Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "ESI Report",
+   "link_to": "ESI Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "PT Report",
+   "link_to": "PT Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "BOSS Salary Register",
+   "link_to": "BOSS Salary Register",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  }
+ ],
+ "modified": "2022-02-24 16:36:31.960407",
+ "modified_by": "Administrator",
+ "module": "Boss",
+ "name": "Client",
+ "owner": "Administrator",
+ "pin_to_bottom": 0,
+ "pin_to_top": 1,
+ "shortcuts": [
+  {
+   "doc_view": "",
+   "label": "Client",
+   "link_to": "Client",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Client Invoice",
+   "link_to": "Client Invoice",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Site",
+   "link_to": "Site",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Timesheet",
+   "link_to": "Timesheet",
+   "type": "DocType"
+  },
+  {
+   "doc_view": "",
+   "label": "Data Upload",
+   "link_to": "Data Import",
+   "type": "DocType"
+  }
+ ]
+}

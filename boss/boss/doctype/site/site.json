@@ -1,12 +1,15 @@
 {
  "actions": [],
+ "allow_rename": 1,
  "autoname": "field:site_name",
  "creation": "2020-12-14 16:39:50.145713",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "site_name"
+  "site_name",
+  "client",
+  "company"
  ],
  "fields": [
   {
@@ -14,11 +17,24 @@
    "fieldtype": "Data",
    "label": "Site Name",
    "unique": 1
+  },
+  {
+   "fetch_from": "client.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "client",
+   "fieldtype": "Link",
+   "label": "Client",
+   "options": "Client"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2020-12-14 16:39:50.145713",
+ "modified": "2021-06-26 12:23:12.539692",
  "modified_by": "Administrator",
  "module": "Boss",
  "name": "Site",

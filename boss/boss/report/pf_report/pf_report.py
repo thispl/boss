@@ -25,7 +25,7 @@ def execute(filters=None):
     salary_slips = get_salary_slips(conditions, filters)
     for ss in salary_slips:
         row = []
-        pfno = frappe.db.get_value("Employee", {'employee': ss.employee}, ['pf_number'])
+        pfno = frappe.db.get_value("Employee", {'employee': ss.employee}, ['uan_no'])
         if pfno:
             row += [pfno]
         else:
@@ -76,10 +76,10 @@ def execute(filters=None):
             row += [epf]
         else:
             epf = 0
-            row += [0]
+            row += [epf]
         
+        eps = 0
         if basic:
-            eps = 0
             eps = round(basic*0.0833)
             if eps and epf > 0:
                 row += [eps]
@@ -96,8 +96,7 @@ def execute(filters=None):
             row += [ss.ab,""]
         else:
             row += [0,""]
-
-           
+        frappe.errprint(row)
         data.append(row)
     return columns, data
 

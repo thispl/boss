@@ -62,21 +62,25 @@ def get_frequency_kwargs(frequency_name):
 	return frequency_dict.get(frequency_name)
 	
 @frappe.whitelist()
-def invoice_item(start_date,end_date,company,client,site):
-	salary_Slip = frappe.get_all('Salary Slip',{'company':company,'client_name':client,'site':site,'start_date':start_date,'end_date':end_date},['name','total_working_hours','hour_rate','start_date'])
+def invoice_item(start_date,end_date,client,site):
+	# frappe.errprint([start_date,end_date,company,client,site])
+
+	salary_slips = frappe.get_all('Salary Slip',{'client_name':client,'site':site,'start_date':start_date,'end_date':end_date},['name','total_working_hours','hour_rate','start_date'])
+	# frappe.errprint(salary_slips)
 	ot_hours = 0
 	ot_amount = 0
 	ctc_amount = 0
 	ot_count = 0
-	emp_count = len(salary_Slip)
-	for ss in salary_Slip:
+	emp_count = len(salary_slips)
+	# frappe.errprint(emp_count)
+	for ss in salary_slips:
 		date = ss.start_date
 		month = date.strftime("%B-%Y")
 		salary_detail = frappe.get_all('Salary Detail',{'parent':ss.name},['*'])		
 		for sd in salary_detail:
 			if sd.salary_component == "Cost to Company":
 				ot_hours += ss.total_working_hours
-				ctc_amount += sd.amount
+				ctc_amount += sd.amount	
 			if sd.salary_component == "Over Time":
 				ot_amount += sd.amount
 				if sd.amount > 0:
@@ -86,4 +90,4 @@ def invoice_item(start_date,end_date,company,client,site):
 	net_amount = round(gross + tax + tax)
 	ot_hours = round(ot_hours)
 	total_in_words = money_in_words(net_amount)
-	return ot_hours,ot_amount,ctc_amount,emp_count,ot_count,gross,tax,net_amount,month,total_in_words
+	return ot_hours,ot_amount,ctc_amount,emp_count,ot_count,gross,tax,net_amount,total_in_words

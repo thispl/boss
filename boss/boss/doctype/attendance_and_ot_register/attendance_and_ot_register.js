@@ -92,5 +92,35 @@ frappe.ui.form.on('Attendance and OT Register', {
 				}
 			});
 		}
+		if(frm.doc.week_off > 0){
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_week_off',
+				args: {
+					week_off: frm.doc.week_off,
+					payroll_date: frm.doc.start_date,
+					employee : frm.doc.employee
+				},
+				callback:function(r){
+					if(r.message){
+
+					}
+				}
+			});
+		}
+		if(frm.doc.night_shift_allowance > 0){
+			frappe.call({
+				method: 'boss.boss.doctype.attendance_and_ot_register.attendance_and_ot_register.create_night_shift_allowance',
+				args: {
+					night_shift_allowance: frm.doc.night_shift_allowance,
+					payroll_date: frm.doc.start_date,
+					employee : frm.doc.employee
+				},
+				callback:function(r){
+					if(r.message){
+
+					}
+				}
+			});
+		}
 	}
 });
